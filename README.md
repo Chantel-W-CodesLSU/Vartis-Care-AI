@@ -1,97 +1,133 @@
-![Vartis Care AI](https://img.shields.io/badge/Vartis%20Care%20AI-Healthcare%20Resource%20Navigator-1a4d2e?style=for-the-badge&logo=heart&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-red?style=for-the-badge&logo=streamlit)
-![Claude](https://img.shields.io/badge/Claude%203.5%20Sonnet-Anthropic-orange?style=for-the-badge)
-![LSU](https://img.shields.io/badge/LSU-CSC%207644-461D7C?style=for-the-badge)
-
-
-
-
 # Vartis Care AI
-### CSC 7644: Applied LLM Development | Final Project
-**Author: Chantel Walker | Louisiana State University | Spring 2026**
+
+<h3 align="center">
+AI-Powered Healthcare Resource Navigation Platform
+</h3>
+
+<p align="center">
+Built for healthcare social workers, patient advocates, and intelligent care coordination.
+</p>
+
+<p align="center">
+<img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+<img src="https://img.shields.io/badge/Streamlit-Frontend-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
+<img src="https://img.shields.io/badge/Claude%203.5-Anthropic-8A2BE2?style=for-the-badge" />
+<img src="https://img.shields.io/badge/RAG-Pipeline-84CC16?style=for-the-badge" />
+<img src="https://img.shields.io/badge/LSU-CSC%207644-461D7C?style=for-the-badge" />
+</p>
+
+---
+
+## Platform Preview
+
+<img width="1631" height="1065" alt="image" src="https://github.com/user-attachments/assets/4e26fc97-0186-4b83-998d-483fd3b47d49" />
+
+```
 
 ---
 
 ## Overview
 
-Vartis Care AI is an AI-powered decision-support system that extracts
-patient eligibility information from unstructured intake notes and clinical
-documents and matches patients to verified community resources in real time.
-It is designed to help healthcare social workers and patient navigators
-reduce manual search time and eliminate referral dead-ends for vulnerable
-patients. This is the final project for CSC 7644: Applied LLM Development
-at Louisiana State University.
+Vartis Care AI is an AI-powered decision-support system that extracts patient eligibility information from unstructured intake notes and clinical documents, then matches patients to verified community resources.
 
-**GitHub Repository:**
-https://github.com/Chantel-W-CodesLSU/csc7644-final-project-walker-VARTIS-AI
+The platform is designed to help healthcare social workers and patient navigators reduce manual search time, improve referral accuracy, and limit referral dead-ends for vulnerable patients.
+
+This project was developed as the final project for **CSC 7644: Applied LLM Development** at **Louisiana State University**.
+
+---
+
+## Why This Matters
+
+Healthcare advocates often spend hours manually searching for assistance programs while patients wait for urgent support.
+
+Vartis Care AI brings together AI-powered extraction, structured eligibility matching, retrieval-augmented generation, and human-in-the-loop advocate review to support faster and more reliable care navigation.
+
+---
+
+## Core Capabilities
+
+| Feature | Description |
+|---|---|
+| AI Extraction | Extracts eligibility markers from intake notes and clinical documents |
+| Resource Matching | Matches patients to verified assistance programs |
+| Patient Profile | Displays structured patient information for advocate review |
+| Search & Filters | Filters resources by need type, source, confidence, and keyword |
+| Human Review | Requires advocate approval before referral delivery |
+| RAG Pipeline | Supports retrieval-based recommendations and planned agentic fallback |
+| Structured Output | Returns clean JSON eligibility profiles and matched resources |
 
 ---
 
 ## Key Features
 
-- Extracts structured eligibility markers (income level, zip code, diagnosis,
-  insurance status, household size, urgency) from patient intake notes
-- Matches patients to 28 verified Atlanta-area community resources across
-  8 need categories: Medication, Medical, Food, Utility, Rent, Housing,
-  Employment, and Clothing
-- Filters resources by need type, source, confidence score, phone availability,
-  and keyword search
-- Color-coded professional resource cards with confidence scores, addresses,
-  phone numbers, and clickable website links
-- Patient profile panel with name, date of birth, zip code, income level,
-  insurance status, household size, urgency level, and case reference number
-- Human-in-the-loop advocate review interface with approval checkboxes
-  before any referral reaches the patient
-- Simulated patient chart upload with advocate notes documentation
-- RAG pipeline architecture backed by ChromaDB vector store (full
-  integration in next development phase)
-- Agentic fallback to FindHelp.org and 211 National Data Platform planned
-  for production deployment
+- Extracts structured eligibility markers including income level, zip code, diagnosis, insurance status, household size, and urgency
+- Matches patients to verified Atlanta-area community resources
+- Organizes resources across need categories such as medication, medical care, food, utilities, rent, housing, employment, and clothing
+- Displays professional resource cards with confidence scores, addresses, phone numbers, and websites
+- Includes a human-in-the-loop advocate review workflow
+- Supports simulated patient chart upload and advocate notes documentation
+- Designed for future RAG expansion using ChromaDB and external resource APIs
 
 ---
 
-## Tech Stack and Architecture
+## Tech Stack
 
-### Models and APIs
-- **Model:** Claude 3.5 Sonnet via Anthropic API
-  (claude-3-5-sonnet-20241022)
-- **External APIs (planned):** FindHelp.org, 211 National Data Platform,
-  NPPES NPI Registry, ASPE Poverty Guidelines, RxUtility API
+| Category | Tools |
+|---|---|
+| Language | Python 3.10+ |
+| Frontend | Streamlit |
+| AI Model | Claude 3.5 Sonnet via Anthropic API |
+| Retrieval | ChromaDB |
+| Evaluation | DeepEval |
+| Architecture | RAG Pipeline, Structured JSON Extraction, Agentic Fallback |
+| Workflow | Human-in-the-Loop Advocate Review |
 
-### Frameworks and Libraries
-- **Frontend:** Streamlit with custom HTML and CSS
-- **Vector Store:** ChromaDB (locally hosted)
-- **Evaluation:** DeepEval (faithfulness and contextual recall)
-- **Language:** Python 3.10+
+---
 
-### Main Components
-- `app.py` - Streamlit web interface, patient profile form, resource
-  display, advocate review workflow
-- `extractor.py` - Eligibility extraction and resource matching logic,
-  structured resource corpus
-- `vartis_agent.py` - Command-line entry point and pipeline coordinator
-- `intake_sample.txt` - Sample de-identified patient intake note
+## System Architecture
 
-### Architecture Flow
+```text
+Patient Intake Note / Clinical Document
+              |
+              v
+Claude 3.5 Sonnet
+AI Eligibility Extraction
+              |
+              v
+Structured JSON Patient Profile
+              |
+              v
+RAG Router
+       /                 \
+      v                   v
+ChromaDB            External APIs
+Resource Corpus     FindHelp / 211 / NPPES
+      \                   /
+              v
+Ranked Resource Recommendations
+              |
+              v
+Advocate Review Interface
+              |
+              v
+Approved Referral Delivered to Patient
 ```
-Patient Intake Note / Document Image
-          |
-  Claude 3.5 Sonnet (Multimodal Extraction)
-          |
-  Structured JSON Eligibility Profile
-  (income, zip, diagnosis, insurance)
-          |
-       RAG Router
-      /           \
-ChromaDB         FindHelp.org / 211 API / NPPES
-(PDF Corpus)       (Agentic Fallback)
-          |
-  Ranked Recommendations + Source Citations
-          |
-  Advocate Review UI (Human-in-the-Loop)
-          |
-  Approved Referral Delivered to Patient
+
+---
+
+## Repository Structure
+
+```text
+vartis-care-ai/
+|
+|- app.py              # Streamlit web interface
+|- extractor.py        # Eligibility extraction and resource matching logic
+|- vartis_agent.py     # Command-line pipeline coordinator
+|- intake_sample.txt   # Sample de-identified intake note
+|- requirements.txt    # Python dependencies
+|- .env.example        # Environment variable template
+|- .gitignore          # Files excluded from version control
+|- README.md           # Project documentation
 ```
 
 ---
@@ -99,62 +135,80 @@ ChromaDB         FindHelp.org / 211 API / NPPES
 ## Setup Instructions
 
 ### Prerequisites
+
 - Python 3.10 or higher
 - pip
-- An Anthropic API key (get one at https://console.anthropic.com)
+- Anthropic API key
 - Windows, macOS, or Linux
 
+---
+
 ### Step 1: Clone the Repository
+
 ```bash
 git clone https://github.com/Chantel-W-CodesLSU/csc7644-final-project-walker-VARTIS-AI.git
 cd csc7644-final-project-walker-VARTIS-AI
 ```
 
+---
+
 ### Step 2: Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
+---
+
 ### Step 3: Configure Environment Variables
-Copy the example environment file and add your API key:
+
+Copy the example environment file:
+
 ```bash
 cp .env.example .env
 ```
 
-Open `.env` and fill in your Anthropic API key:
-```
+Open `.env` and add your Anthropic API key:
+
+```env
 ANTHROPIC_API_KEY=your_key_here
 ```
 
-> Note: Never commit your `.env` file. It is already listed in `.gitignore`.
+Do not commit your `.env` file.
 
 ---
 
 ## Running the Application
 
-### Option 1: Streamlit Web Interface (Recommended)
+### Streamlit Web App
+
 ```bash
 streamlit run app.py
 ```
-The app opens automatically in your browser at:
-```
+
+The app will open at:
+
+```text
 http://localhost:8501
 ```
 
-**How to use the app:**
-1. Fill in the Patient Profile fields at the top
-2. Use the filter panel to narrow resources by need type, source,
-   or confidence score
-3. Review the matched community resources on the right
-4. Add advocate notes in the notes panel at the bottom
-5. Check all three approval boxes and click Upload to Patient Chart
+---
 
-### Option 2: Command Line Interface
-```bash
-python vartis_agent.py --mode extract --input intake_sample.txt
-```
+## How to Use the App
 
-**Expected output:**
+1. Fill in the patient profile fields
+2. Enter or upload intake information
+3. Allow the system to extract eligibility markers
+4. Review matched community resources
+5. Filter recommendations by need type, source, confidence, or keyword
+6. Add advocate notes
+7. Complete the human-review checklist
+8. Upload the approved referral summary to the patient chart
+
+---
+
+## Example Output
+
 ```json
 {
   "income_level": "below_200_fpl",
@@ -176,96 +230,63 @@ python vartis_agent.py --mode extract --input intake_sample.txt
 
 ---
 
-## Repository Organization
+## Resource Categories
 
-```
-csc7644-final-project-walker-VARTIS-AI/
-|
-|- app.py                 # Streamlit web interface, patient profile,
-|                         # resource display, advocate review workflow
-|
-|- extractor.py           # Eligibility extraction and resource matching,
-|                         # structured corpus of 28 verified resources
-|
-|- vartis_agent.py        # Command-line entry point and pipeline
-|                         # coordinator
-|
-|- intake_sample.txt      # Sample de-identified patient intake note
-|                         # for demonstration
-|
-|- requirements.txt       # All Python dependencies
-|
-|- .env.example           # Template for environment variables
-|                         # (copy to .env and fill in API key)
-|
-|- .gitignore             # Files excluded from version control
-|                         # (includes .env, API keys, media files)
-|
-|- README.md              # Project documentation (this file)
-```
+The system organizes recommendations across the following categories:
+
+- Medication Assistance
+- Medical Care
+- Food Assistance
+- Utility Assistance
+- Rent Assistance
+- Housing Support
+- Employment Resources
+- Clothing Assistance
+
+Each resource includes available details such as address, phone number, website, source, and confidence score.
 
 ---
 
-## Expected Output
+## Future Improvements
 
-The system returns a structured eligibility profile with matched community
-resources organized by need type including:
-
-- MEDICATION: GoodRx, NeedyMeds
-- MEDICAL: Good Samaritan Health Center, Mercy Care Atlanta
-- UTILITY: LIHEAP, Georgia Power, Georgia Natural Gas, Atlanta Gas Light,
-  Salvation Army LIHEAP, City of Atlanta Utility Assistance
-- FOOD: The Salvation Army Atlanta, Atlanta Community Food Bank
-- RENT: Trinity Community Ministries, United Way of Greater Atlanta
-- HOUSING: Atlanta Mission, Covenant House Georgia, Atlanta Housing
-  Authority Section 8, Georgia DCA Section 8, Partners for HOME,
-  Integrity Transitional Housing
-- EMPLOYMENT: Georgia Department of Labor, Goodwill of North Georgia,
-  WorkSource Atlanta, Atlanta Urban League, Year Up Atlanta
-- CLOTHING: Dress for Success Atlanta, Salvation Army Thrift Store,
-  St. Vincent de Paul Georgia, Open Hand Atlanta
-
-All resources include address, phone number where available, website,
-source, and confidence match score. Results are filterable by need type,
-source, confidence level, phone availability, and keyword search.
+- Secure cloud deployment
+- HIPAA-aligned infrastructure design
+- Live FindHelp and 211 API integrations
+- Multi-patient dashboard
+- Vectorized PDF corpus ingestion
+- Real-time recommendation ranking
+- Improved resource verification workflow
+- Role-based access control for advocates
+- Audit logging for sensitive workflow actions
+- Expanded RAG evaluation with faithfulness and contextual recall metrics
 
 ---
 
-## Attributions and Citations
+## Project Impact
 
-- Anthropic Claude API Documentation:
-  https://docs.anthropic.com/en/docs/about-claude/models
+Vartis Care AI demonstrates how large language models can support healthcare navigation by reducing manual search burden, improving structured intake review, and helping advocates identify relevant resources more efficiently.
 
-- ChromaDB Documentation:
-  https://docs.trychroma.com
-
-- DeepEval Documentation:
-  https://docs.confident-ai.com
-
-- Streamlit Documentation:
-  https://docs.streamlit.io
-
-- FindHelp.org API:
-  https://company.findhelp.com/api
-
-- Lewis, P., et al. (2020). Retrieval-augmented generation for
-  knowledge-intensive NLP tasks. NeurIPS.
-  https://arxiv.org/abs/2005.11401
-
-- Hu, E. J., et al. (2022). LoRA: Low-rank adaptation of large
-  language models. ICLR.
-  https://arxiv.org/abs/2106.09685
-
-- Liang, H., et al. (2019). Evaluation and accurate diagnoses of
-  pediatric diseases using artificial intelligence. Nature Medicine.
-  https://doi.org/10.1038/s41591-018-0335-9
+The system is not a replacement for professional judgment. It is designed as a decision-support tool that keeps human advocates in control of final review and referral approval.
 
 ---
 
-## Notes on Scope
+## Author
 
-The current prototype demonstrates the full user interface and workflow
-with a structured static resource corpus. Live Anthropic API extraction,
-ChromaDB RAG retrieval, and external API agentic fallbacks are planned
-for the next development phase. No real patient data is used at any
-stage of development or evaluation.
+**Chantel Walker**  
+Graduate Computer Science Student  
+Louisiana State University  
+CSC 7644: Applied LLM Development  
+Spring 2026
+
+
+---
+
+## References
+
+- Anthropic Claude API Documentation
+- Streamlit Documentation
+- ChromaDB Documentation
+- DeepEval Documentation
+- FindHelp.org API
+- 211 National Data Platform
+- Lewis et al. (2020), Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
